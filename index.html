@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>With love from Masha</title>
+    <title>Be My Valentine?</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        /* CSS - The Look */
         body {
             background-color: #ffdeeb;
             display: flex;
@@ -13,7 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            overflow: hidden; /* Prevents scrollbars when the button moves */
+            overflow: hidden;
             font-family: 'Arial', sans-serif;
         }
 
@@ -25,6 +25,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             max-width: 400px;
             width: 90%;
+            z-index: 10;
         }
 
         h1 {
@@ -45,7 +46,7 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            height: 60px; /* Space for buttons to exist */
+            height: 60px;
         }
 
         button {
@@ -65,9 +66,10 @@
         }
 
         #noBtn {
-            background-color: #e40202;
+            background-color: #da1111;
             color: white;
-            position: absolute; /* Needed for the "jump" effect */
+            position: absolute;
+            transition: 0.1s;
         }
 
         #yesBtn:hover {
@@ -87,15 +89,13 @@
     </div>
 
     <script>
-        // JavaScript - The Magic
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const mainGif = document.getElementById('main-gif');
         const question = document.getElementById('question');
 
-        // Logic to make the 'No' button run away
+        // Logic to make the 'No' button run away (No fireworks here!)
         noBtn.addEventListener('mouseover', () => {
-            // Calculate random positions within the visible window
             const maxX = window.innerWidth - noBtn.offsetWidth;
             const maxY = window.innerHeight - noBtn.offsetHeight;
 
@@ -106,14 +106,37 @@
             noBtn.style.top = randomY + 'px';
         });
 
-        // Logic for when they click 'Yes'
+        // Click 'Yes' Logic with RED fireworks
         yesBtn.addEventListener('click', () => {
-            question.innerHTML = "Yeey!!😍 I knew you'd say yes. 😘";
+            question.innerHTML = "Yeey!!😍 I knew you'd say yes! 😘";
             mainGif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHBoazMyMHhmYnp4djl3MGphODBzaG5kbGlvdG5jeTkzNTkwMW5hbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/auGFCmg6rM0eI/giphy.gif";
-            noBtn.style.display = 'none'; // Remove the No button
-            yesBtn.style.transform = "scale(1.5)"; // Make Yes button grow
+            noBtn.style.display = 'none';
+            
+            // RED Fireworks Explosion
+            var count = 200;
+            var defaults = {
+                origin: { y: 0.7 },
+                colors: ['#FF0000', '#B22222', '#8B0000'] // Various shades of red
+            };
+
+            function fire(particleRatio, opts) {
+                confetti({
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
+                });
+            }
+
+            fire(0.25, { spread: 26, startVelocity: 55 });
+            fire(0.2, { spread: 60 });
+            fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
+            fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
+            fire(0.1, { spread: 120, startVelocity: 45 });
         });
     </script>
 
+</body>
+</html>
+    </script>
 </body>
 </html>
