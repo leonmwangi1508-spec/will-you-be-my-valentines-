@@ -1,1 +1,119 @@
-# will-you-be-my-valentines-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With love from Masha</title>
+    <style>
+        /* CSS - The Look */
+        body {
+            background-color: #ffdeeb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; /* Prevents scrollbars when the button moves */
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #main-gif {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 60px; /* Space for buttons to exist */
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #noBtn {
+            background-color: #e40202;
+            color: white;
+            position: absolute; /* Needed for the "jump" effect */
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="main-gif" src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bnluZ2cxdGh3eWdwd3hnODRibW43ZXN2eWJjcnRta2ltdDdnNDd1dCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/5PhYotn1t5s0M10Aly/giphy.gif">
+        <h1 id="question">Will you be my Valentine Bianca? ❤️</h1>
+        <div class="buttons">
+            <button id="yesBtn">Yes!</button>
+            <button id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript - The Magic
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const mainGif = document.getElementById('main-gif');
+        const question = document.getElementById('question');
+
+        // Logic to make the 'No' button run away
+        noBtn.addEventListener('mouseover', () => {
+            // Calculate random positions within the visible window
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        });
+
+        // Logic for when they click 'Yes'
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "Yeey!!😍 I knew you'd say yes. 😘";
+            mainGif.src = "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHBoazMyMHhmYnp4djl3MGphODBzaG5kbGlvdG5jeTkzNTkwMW5hbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/auGFCmg6rM0eI/giphy.gif";
+            noBtn.style.display = 'none'; // Remove the No button
+            yesBtn.style.transform = "scale(1.5)"; // Make Yes button grow
+        });
+    </script>
+
+</body>
+</html>
